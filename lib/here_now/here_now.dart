@@ -136,14 +136,9 @@ class _HereNowState extends State<HereNow> {
     }
   }
 
-  refresh() async {
-    departures = {};
-    closestStop = null;
-    await init();
-  }
-
   Future<Null> doRefresh() async {
-    await refresh();
+    departures = {};
+    await init();
     return new Future<Null>.value();
   }
 
@@ -153,6 +148,7 @@ class _HereNowState extends State<HereNow> {
     if (selectedStation != null) {
       setState(() {
         closestStop = selectedStation;
+        departures = {};
       });
       loadData();
     }
@@ -194,11 +190,6 @@ class _HereNowState extends State<HereNow> {
                                           )
                                         ],
                                       ))) : new Center(child: new CircularProgressIndicator())
-                          ),
-                          new IconButton(
-                            onPressed: refresh,
-                            padding: EdgeInsets.zero,
-                            icon: new Icon(Icons.refresh, color: Colors.black26, size: 30.0),
                           ),
                           new Padding(
                               padding: new EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
